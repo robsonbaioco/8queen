@@ -35,87 +35,7 @@
     </head>
     <body>
         <div class="container">
-            <table class="table"> 
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <table class="table" id="board"> 
             </table>
         </div>
 
@@ -125,6 +45,15 @@
         <script>
             const chessBoard =  {};
             $(document).ready(function() {
+                for (let i = 0; i < 8; i++) {
+                    let idRow = i + 1;
+                    $("#board").append($(`<tr id=${idRow}>`));
+                    for (let j = 0; j < 8; j++) {
+                        let idColumn = j + 1;
+                        $(`#${idRow}`).append($(`<td id=${idRow}-${idColumn}>`))
+                    }
+                }
+                                
                 let row, column, aux;
     
                 row = 1;
@@ -143,7 +72,7 @@
                     row++;
                 });
             });
-
+            
             function addFirstQueen(row, column) {
                 $(`.${row}-${column}`).html(`<span class="dot"></span>`);
                 chessBoard[row][column] = 'queen'
