@@ -123,24 +123,25 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
         <script>
-            const chessBoard =  {
-            };
-            let row, column, aux;
-
-            row = 1;
-            column = 1;
-            aux = 1;
-            $("tr").each(function(i, v) {
-                chessBoard[row]={};
-                $(this).find('td').each(function(j, w){
-                    if (column > 8) {
-                        column = 1;
-                    }
-                    $(this).addClass(`${row}-${column}`)
-                    chessBoard[row][column] = '';
-                    column++;
+            const chessBoard =  {};
+            $(document).ready(function() {
+                let row, column, aux;
+    
+                row = 1;
+                column = 1;
+                aux = 1;
+                $("tr").each(function(i, v) {
+                    chessBoard[row]={};
+                    $(this).find('td').each(function(j, w){
+                        if (column > 8) {
+                            column = 1;
+                        }
+                        $(this).addClass(`${row}-${column}`)
+                        chessBoard[row][column] = '';
+                        column++;
+                    });
+                    row++;
                 });
-                row++;
             });
 
             function addFirstQueen(row, column) {
@@ -166,31 +167,17 @@
                 }
             }
 
-            function verifyRow(row){
-                for (let index = 1; index < 9; index++) {
-                    if (chessBoard[row][index] != '') {
-                        return false;
-                    }
+
+            function verifyPlace(row, column){
+                if (chessBoard[row][column] == '') {
+                    return true;
                 }
-                return true;
+                return false;
             }
 
-            function verifyColumn(column){
-                for (let index = 1; index < 9; index++) {
-                    if (chessBoard[index][column] != '') {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            function verifyDiagonals(row, column) {
-                for (let index = 0; index < array.length; index++) {
-                    
-                }
-            }
+            
             function addQueen(row, column) {
-                if (verifyColumn(column) && verifyRow(row)) {
+                if (verifyPlace(row, column)) {
                     addFirstQueen(row, column);
                 }else{
                     return false;
