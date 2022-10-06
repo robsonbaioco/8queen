@@ -78,6 +78,8 @@
                 chessBoard[row][column] = 'queen'
                 markDeadColumn(column);
                 markDeadRow(row);
+                markDeadDiagonal(row, column);
+                return `Queen added on ${row}-${column}`;
             }
 
             function markDeadRow(row){
@@ -91,9 +93,53 @@
             function markDeadColumn(column){
                 for (let index = 1; index < 9; index++) {
                     if (chessBoard[index][column] != 'queen') {
-                        chessBoard[index][column] = 'deadZone'
+                        chessBoard[index][column] = 'deadZone';
                     }
                 }
+            }
+
+            function markDeadDiagonal(row, column){
+                //dado uma certa coordenada, achar as 4 diagonais que se inicial a partir da mesma
+                let maxlength = 8;
+                let maxheight = 8;
+                let aux_row, aux_column;
+                
+                //diagonal inferior direita
+                aux_row = row;
+                aux_column = column;
+                while (aux_row < 8 && aux_column < 8) {
+                    aux_column++;
+                    aux_row++;
+                    chessBoard[aux_row][aux_column] = 'deadZone';    
+                }
+
+                //diagonal superior direita
+                aux_row = row;
+                aux_column = column;
+                while ((aux_row < 8 && aux_row > 1) && (aux_column < 8 && aux_column > 1)) {
+                    aux_column++;
+                    aux_row--;
+                    chessBoard[aux_row][aux_column] = 'deadZone';  
+                }
+
+                //diagonal inferior esquerda
+                aux_row = row;
+                aux_column = column;
+                while ((aux_row < 8 && aux_row > 1) && (aux_column < 8 && aux_column > 1)) {
+                    aux_column--;
+                    aux_row++;
+                    chessBoard[aux_row][aux_column] = 'deadZone';   
+                }
+
+                //diagonal superior esquerda
+                aux_row = row;
+                aux_column = column;
+                while ((aux_row < 8 && aux_row > 1) && (aux_column < 8 && aux_column > 1)) {
+                    aux_column--;
+                    aux_row--;
+                    chessBoard[aux_row][aux_column] = 'deadZone'    
+                }
+
             }
 
 
